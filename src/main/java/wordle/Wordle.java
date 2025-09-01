@@ -8,13 +8,12 @@ public class Wordle {
     private final String secretWord;
     private final int attempts;
 
-    public Wordle (String secretWord, int attempts) {
-        this.secretWord = secretWord;
+    public Wordle(String secretWord, int attempts) {
+        this.secretWord = secretWord.toLowerCase();
         this.attempts = attempts;
     }
 
     public String play() {
-        String answer = secretWord.toLowerCase();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to wordle! Guess the 5 letter secret word within " + attempts + " attempts and you win!");
         int guesses = attempts;
@@ -32,16 +31,16 @@ public class Wordle {
                 System.out.println("The secret word is five letters. Try again!");
                 continue;
             }
-            if (guess.equals(answer)) {
+            if (guess.equals(this.secretWord)) {
                 return "Congratulations! You found the secret word!";
             }
-            for (int j = 0; j < answer.length(); j++) {
+            for (int j = 0; j < this.secretWord.length(); j++) {
                 char letter = guess.charAt(j);
-                if (answer.contains(Character.toString(letter))) {
+                if (this.secretWord.contains(Character.toString(letter))) {
                     correctCharCount++;
                     correctLetters.add(letter);
                 }
-                if (guess.charAt(j) == answer.charAt(j)) {
+                if (guess.charAt(j) == this.secretWord.charAt(j)) {
                     correctPositionCount++;
                 }
             }
@@ -57,6 +56,6 @@ public class Wordle {
             }
             System.out.println("Guesses remaining: " + guesses);
         }
-        return "Better luck next time! The correct word was " + secretWord;
+        return "Better luck next time! The correct word was " + this.secretWord;
     }
 }
