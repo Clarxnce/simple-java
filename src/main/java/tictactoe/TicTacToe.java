@@ -32,7 +32,7 @@ public class TicTacToe {
             }
             board[row][column] = currentPlayer;
             printBoard();
-            if (isWinningMove()) {
+            if (isWinningMove(row, column)) {
                 return "Congratulations! Player " + currentPlayer + " has won the game!";
             }
             changePlayer();
@@ -40,15 +40,14 @@ public class TicTacToe {
         return "Game over! As the board is now full, this game ended in a draw.";
     }
 
-    private boolean isWinningMove() {
+    private boolean isWinningMove(int row, int col) {
         //vertical 3 (column 0,1 or 2), horizontal 3 (row 0,1 or 2), diagonal 3 (0,0, 1,1, 2,2 OR 2,0, 1,1, 0,2)
-        for (int i = 0; i < board.length; i++) {
             //row win
-            if (board[i][0] != ' ' && board[i][0] == board[i][1] && board[i][0] == board[i][2]) {
+            if (board[row][0] != ' ' && board[row][0] == board[row][1] && board[row][0] == board[row][2]) {
                 return true;
             }
             //column win
-            if (board[0][i] != ' ' && board[0][i] == board[1][i] && board[0][i] == board[2][i]) {
+            if (board[0][col] != ' ' && board[0][col] == board[1][col] && board[0][col] == board[2][col]) {
                 return true;
             }
             //main diagonal win
@@ -58,7 +57,6 @@ public class TicTacToe {
             //anti-diagonal win
             if (board[0][2] != ' ' && board[0][2] == board[1][1] && board[0][2] == board[2][0]) {
                 return true;
-            }
         }
         return false;
     }
